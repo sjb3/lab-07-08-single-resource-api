@@ -1,0 +1,24 @@
+{
+  "name": "lab-justin",
+  "version": "1.0.0",
+  "description": "lab-07-single-resource-api (ROUTER)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "justin",
+  "license": "ISC",
+  "dependencies": {
+    "del": "^2.2.0",
+    "mkdirp": "^0.5.1",
+    "node-uuid": "^1.4.7"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-nodemon": "^2.0.7",
+    "superagent": "^2.0.0-alpha.3"
+  }
+}
