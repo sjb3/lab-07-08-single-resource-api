@@ -1,7 +1,6 @@
 'use strict';
 
 const fs = require('fs');
-
 const Storage = module.exports = function(dataDir){
   this.dataDir = dataDir;
 };

@@ -34,13 +34,17 @@ module.exports = function(router){
     }
     response(404, 'not found')(res);
   });
+//
+  router.get('/api/note/all', function(req, res){
+    const idArray = [];
 
-  // router.get('/api/note/all', function(req, res){
-  //   const note = notePool[req.url.query.id];
-  //
-  //   if (note){
-  //     return response(200, note)(res);
-  //   }
-  //   response(404, 'not found')(res);
-  // });
+    if(Object.keys(notePool).length === 0) {
+      return response(404, 'not found')(res);
+    }
+
+    for (var id in notePool) {
+      idArray.push(id);
+    }
+  });
+//
 };
