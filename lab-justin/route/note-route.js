@@ -34,17 +34,15 @@ module.exports = function(router){
     }
     response(404, 'not found')(res);
   });
-//
-  router.get('/api/note/all', function(req, res){
-    const idArray = [];
 
+  router.get('/api/note/all', function(req, res){
+    const arr = [];
+
+    for (var id in notePool) {
+      arr.push(id);
+    }
     if(Object.keys(notePool).length === 0) {
       return response(404, 'not found')(res);
     }
-
-    for (var id in notePool) {
-      idArray.push(id);
-    }
   });
-//
 };

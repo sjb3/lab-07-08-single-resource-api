@@ -12,23 +12,23 @@ const Router = module.exports = function(){
   };
 };
 
-Router.prototype.get = function(endpoint, cb){
-  this.routes.GET[endpoint] = cb;
+Router.prototype.get = function(endpoint, callback){
+  this.routes.GET[endpoint] = callback;
   return this;
 };
 
-Router.prototype.put = function(endpoint, cb){
-  this.routes.PUT[endpoint] = cb;
+Router.prototype.put = function(endpoint, callback){
+  this.routes.PUT[endpoint] = callback;
   return this;
 };
 
-Router.prototype.post = function(endpoint, cb){
-  this.routes.POST[endpoint] = cb;
+Router.prototype.post = function(endpoint, callback){
+  this.routes.POST[endpoint] = callback;
   return this;
 };
 
-Router.prototype.delete = function(endpoint, cb){
-  this.routes.DELETE[endpoint] = cb;
+Router.prototype.delete = function(endpoint, callback){
+  this.routes.DELETE[endpoint] = callback;
   return this;
 };
 

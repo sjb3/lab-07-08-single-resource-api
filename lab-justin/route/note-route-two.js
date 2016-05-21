@@ -23,6 +23,5 @@ module.exports = function(router){
 
     response(400, 'bad request')(res);
     response(404, 'not found')(res);
-
   });
 };
