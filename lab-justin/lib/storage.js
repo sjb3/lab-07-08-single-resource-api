@@ -1,10 +1,10 @@
 'use strict';
 
 const fs = require('fs');
-
 const Storage = module.exports = function(dataDir){
   this.dataDir = dataDir;
 };
+const del = require('del');
 
 Storage.prototype.setItem = function(schema, item){
   return new Promise((resolve, reject) => {
@@ -27,4 +27,15 @@ Storage.prototype.fetchItem = function(schema, id){
       }
     });
   });
+
+  // Storage.prototype.deleteItem = function(schema, callback){
+  // // return new Promise((resolve, reject)=>{
+  // //   fs.del(`${this.dataDir}/${schema}/${id}`)
+  // //
+  // // })
+  //   del(`${this.dataDir}/${schema}/${id}`, function(err, item){
+  //     if (err) return reject(err);
+  //   });
+  // };
+
 };
