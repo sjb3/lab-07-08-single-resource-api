@@ -2,6 +2,7 @@
 
 const Note = require('../model/note');
 const response = require('../lib/response');
+// const Note = require('../lib/storage');
 
 var notePool = {};
 

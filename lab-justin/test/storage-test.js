@@ -20,3 +20,37 @@ describe('testing storage module', function(){
     });
   });
 });
+
+describe('testing storage module', function(){
+  describe('testing fetchItem', function(){
+    it('should retrieve the item', function(done){
+      testStoreage.setItem('note', {id: 123456, content: 'test test test'})
+      .then(function(item){
+        expect(item.id).to.equal(123456);
+        expect(item.content).to.equal('test test test');
+        done();
+      }).catch(function(err){
+        console.error(err);
+        expect(err).to.equal(undefined);
+        done();
+      });
+    });
+  });
+});
+
+describe('testing storage module', function(){
+  describe('testing deleteItem', function(){
+    it('should delete the item', function(done){
+      testStoreage.setItem('note', {id: 123456, content: 'test test test'})
+      .then(function(item){
+        expect(item.id).to.equal(123456);
+        expect(item.content).to.equal('test test test');
+        done();
+      }).catch(function(err){
+        console.error(err);
+        expect(err).to.equal(undefined);
+        done();
+      });
+    });
+  });
+});
