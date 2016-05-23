@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const del = require('del');
-
+const mkdirp = require('mkdirp');
 const Storage = module.exports = function(dataDir){
   this.dataDir = dataDir;
 };
@@ -33,14 +33,25 @@ Storage.prototype.fetchItem = function(schema, id){
 Storage.prototype.deleteItem = function(schema, id){
   return new Promise((resolve, reject) => {
     fs.unlink(`${this.dataDir}/${schema}/${id}`, function(schema, id){
-        // if(err) return reject(err);
       try{
         del(`${this.dataDir}/${schema}/${id}`, ()=>{
           console.log('Deleted files and folders: ', `${this.dataDir}/${schema}/${id}`);
         });
-      }catch(err){
+      } catch(err){
         reject(err);
       }
+    });
+  });
+};
+
+Storage.prototype.createSubDir = function(schema, item){
+  return new Promise((resolve, reject) => {
+    mkdirp('/subdir', function(err){
+      if(err) console.log(err);
+    });
+    fs.writeFile(`${this.dataDir}/${schema}/${item.id}`, JSON.stringify(item), function(err){
+      if (err) return reject(err);
+      resolve(item);
     });
   });
 };

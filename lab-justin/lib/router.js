@@ -47,6 +47,7 @@ Router.prototype.route = function(){
       }
       fourOhFour(res);
     }).catch(function(err){
+      console.log(err);
       fourOhFour(res);
     });
   };
