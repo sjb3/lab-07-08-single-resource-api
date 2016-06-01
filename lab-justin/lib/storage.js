@@ -1,7 +1,6 @@
 'use strict';
 
 const fs = require('fs');
-// const del = require('del');
 const mkdirp = require('mkdirp');
 const Storage = module.exports = function(dataDir){
   this.dataDir = dataDir;
@@ -32,15 +31,14 @@ Storage.prototype.fetchItem = function(schema, info){
 
 Storage.prototype.deleteItem = function(schema, id){
   return new Promise((resolve, reject) => {
-    //formery err -> id
+    //former err -> id
     fs.unlink(`${this.dataDir}/${schema}/${id}`, function(schema, err){
       if(err) return reject(err);
-
       return resolve();
     });
   });
 };
-// 
+//
 
 Storage.prototype.createSubDir = function(schema, item){
   return new Promise((resolve, reject) => {

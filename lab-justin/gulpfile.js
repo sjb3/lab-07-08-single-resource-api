@@ -31,14 +31,3 @@ gulp.task('nodemon', () => {
 });
 
 gulp.task('default', ['eslint', 'mocha', 'test']);
-
-// gulp.task('default', () => {
-//   return gulp.src('test.js')
-//     .pipe(mocha())
-//     .once('error', () => {
-//       process.exit(1);
-//     })
-//     .once('end', () => {
-//       process.exit();
-//     });
-// });
