@@ -3,26 +3,27 @@
 const Note = require('../model/note');
 const response = require('../lib/response');
 // const Note = require('../lib/storage');
-
+// const fs = require('fs');
+// const noteStorage = new Storage()
 // const note = notePool[req.url.query.id];
 // const note = new Note(req.body.content);
-
+// const dataDir = new Storage(`${__dirname}/../storage`);
 var notePool = {};
 
 module.exports = function(router){
-
   router.post('/api/note', function(req, res){
     if (req.body){
-      const note = new Note(req.body.content);
-      notePool[note.id] = note;
-      return response(200, note)(res);
+      let newId = req.body.id || null;
+      const newNote = new Note(req.body.content, newId);
+      notePool[newNote.id] = newNote;
+
+      return response(200, newNote)(res);
     }
     response(400, 'bad request')(res);
   });
 
   router.get('/api/note', function(req, res){
     const note = notePool[req.url.query.id];
-
     if (note){
       return response(200, note)(res);
     }
@@ -30,16 +31,16 @@ module.exports = function(router){
   });
 
   router.delete('/api/note', function(req, res){
-    const note = notePool[req.url.query.id];
 
-    if(note.id) {
+    let newId = req.body.id;
+    // const note = console.log(notePool[newId]);
 
-      if(note) {
-        delete notePool[note.id];
-        return response(200, 'Successfully deleted');
-      }
-      response(404, 'not found')(res);
+    if(notePool[newId]){
+      delete notePool[newId];
+      return response(200, 'Successfully deleted')(res);
     }
+    // }
+    response(404, 'not found')(res);
   });
 
   router.put('/api/note', function(req, res){

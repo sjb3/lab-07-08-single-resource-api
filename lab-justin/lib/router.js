@@ -42,11 +42,11 @@ Router.prototype.route = function(){
       //if there's function at the specific location and method
       //it will be called with (req, res)
       if(typeof routes[req.method][req.url.pathname] === 'function'){
-        console.log('HIT', req.method, req.url.pathname);
         return routes[req.method][req.url.pathname](req, res);
       }
       fourOhFour(res);
     }).catch(function(err){
+      //w/o console.log(err) below -> eslint goes nuts
       console.log(err);
       fourOhFour(res);
     });
@@ -54,7 +54,7 @@ Router.prototype.route = function(){
 };
 
 function fourOhFour(res){
-  res.writeHead(3000, {
+  res.writeHead(404, {
     'Content-Type': 'application/json'
   });
 

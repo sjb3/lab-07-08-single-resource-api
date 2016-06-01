@@ -5,16 +5,15 @@ module.exports = function(req){
     if(/(POST|PUT|DELETE)/.test(req.method)){
       req.body = '';
       req.on('data', function(data){
-        //append to the strinf +=
         req.body += data.toString();
       });
 
       req.on('end', function(){
         try {
           req.body = JSON.parse(req.body);
-          resolve();
+          return resolve();
         } catch(err){
-          reject(err);
+          return reject(err);
         }
       });
       return;

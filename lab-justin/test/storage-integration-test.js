@@ -10,48 +10,72 @@ describe ('testing for storage-integration', function(){
   before(function(done){
     if(!server.isRunning){
       server.listen(port, function(){
+        server.isRunning = true;
         done();
       });
       return;
     }
     done();
   });
+
   after(function(done){
     if(server.isRunning){
       server.close(function(){
-        server.close(function(){
-          server.isRunning = false;
-          done();
-        });
-        return;
+        server.isRunning = false;
+        console.log('shutdown the server');
+        done();
       });
       return;
     }
     done();
   });
-  describe('testing /api/note GET method', function(){
+  //test POST
+  describe('testing /api/note POST method', function(){
+    let testNote = {};
     before((done) => {
-      console.log('BEFORE REQUEST: ', `${serverUrl}/api/note`);
-      request.post(`${serverUrl}/api/note`)
-      .send({content: 'test note !!!'})
+      request
+        .post(`${serverUrl}/api/note`)
+        .send({content: 'testnote!', id: '123456'})
         .end((err, res) => {
-          if (err) console.log('ERR: ', err);
-          request.get(`${serverUrl}/api/note?id=${res.body.id}`)
-          .end((err, res) => {
-            if (err) console.log('ERR: ', err);
-            this.res = res;
-            done();
-          });
+          if (err) return (err);
+          testNote = res;
+          done();
         });
     });
-    it('should return status 200', () => {
-      expect(this.res.status).to.equal(200);
-    });
-    it('should return a note', () => {
-      // throw new Error(this.res.body);
-      console.log('THIS IS IT: ', this.res.body);
-      expect(this.res.body.content).to.equal('test note !!!');
 
+    it('should return status 200', (done) => {
+      expect(testNote.status).to.equal(200);
+      done();
+    });
+    it('should return a note', (done) => {
+      expect(testNote.body.content).to.equal('testnote!');
+      done();
+    });
+  });
+  //test GET
+  //FIX IT!!!
+  describe('testing /api/note GET method', function(){
+    it('should return status: 200', (done)=> {
+      request
+      .get(`http://localhost:${port}/api/note`)
+      .query('content=testnote!')
+      .end((err, res) =>{
+        expect(res.status).to.eql(200);
+        done();
+      });
+    });
+  });
+
+//test DELETE
+  describe('testing /api/note DELETE method', function(){
+    it('should return atatus 200', (done) =>{
+      request
+      .del(`http://localhost:${port}/api/note?id=testnote!`)
+      .send({id:'123456'})
+      .end((err, res) =>{
+        expect(res.status).to.eql(200);
+        done();
+      });
     });
   });
 });

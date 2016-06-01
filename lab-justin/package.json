@@ -4,11 +4,12 @@
   "description": "lab-07-single-resource-api (ROUTER)",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./note_modules/mocha/bin/mocha"
   },
   "author": "justin",
   "license": "ISC",
   "dependencies": {
+    "debug": "^2.2.0",
     "del": "^2.2.0",
     "mkdirp": "^0.5.1",
     "node-uuid": "^1.4.7"
